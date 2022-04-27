@@ -1,5 +1,8 @@
-export class Administrator {
+import { User } from "./user";
 
-    //View stock, search, update stock
+export class Administrator {
+    adminDetails: User;
+    //View stock,
+    //search, update stock
     //view customer details, purchase hisrory
 }

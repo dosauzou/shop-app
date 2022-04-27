@@ -7,7 +7,6 @@ export class User {
     username: String;
     password: String;
     phoneNo: String;
-    accountDetails: Account;
     
 }
 

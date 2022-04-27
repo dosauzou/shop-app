@@ -1,9 +1,10 @@
 export class Item {
 
     title: String;
-    manufaturer: String;
+    manufacturer: String;
     price: String;
     category: String;
+    quantity: number
     
     
 }

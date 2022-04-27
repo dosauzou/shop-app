@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/classes/user';
+import { Customer } from 'src/app/classes/customer';
 import { AuthService } from 'src/app/services/auth.service';
 import { ApiService } from 'src/app/services/api.service';
 @Component({
@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user: User = new User();
+  user: Customer = new Customer();
   credentials = {username: '', password: ''};
 
 
@@ -39,9 +39,22 @@ export class LoginComponent implements OnInit {
         if (res.status) { 
           this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));  
           this._auth.setDataInLocalStorage('token', res.token);  
-          this._router.navigate(['']);
+          console.log(JSON.parse(localStorage.userData)[0].admin)
+          if(JSON.parse(localStorage.userData)[0].admin == '0'){
+            this._router.navigate(['customer-panel']);
+          } else
+          this._router.navigate(['admin-panel']);
+
+
         }
       })
+      // this.credentials.password= this.getPassword;
+      // this.credentials.username = this.getUsername
+
+      // this.app.authenticate(this.credentials, () =>  {
+      //     this.router.navigateByUrl('/profile');
+      // });
+      // return false;
   
     }
 
