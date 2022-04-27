@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="container">
+    <form [formGroup] = "loginForm"  (ngSubmit)="onSubmit()">
+          <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
+            formControlName ="username">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"
+            formControlName ="password">
+          </div>
+          <div class="form-check mb-3">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <router-outlet></router-outlet>
+  
+  
