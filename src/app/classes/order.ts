@@ -5,4 +5,5 @@ export class Order {
     accountDetails: Account;
     items: Array<Item>
     date: Date
+    total: number;
 }
