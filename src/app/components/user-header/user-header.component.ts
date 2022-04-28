@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-user-header',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHeaderComponent implements OnInit {
 
-  constructor() { }
+  showCart(){
+    const dialogRef = this.dialog.open(
+      CartComponent,{
+        panelClass: 'my-outlined-dialog',
+        width: '500px',
+        height: '600px',
+        data:{}
+      })
+  }
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }

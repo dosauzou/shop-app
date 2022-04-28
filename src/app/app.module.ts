@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     CustomerPanelComponent,
     CartComponent,
     AdminHeaderComponent,
-    UserHeaderComponent
+    UserHeaderComponent,
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,18 @@
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </head>
+    <div class="dropdown float-right">
+    <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">3</span>
+    </button>
+    </div>
+    
+    
   <body>
     <main>
 <div  class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
@@ -16,7 +30,7 @@
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox  value="{{item.category}" class="form-check">{{item.category}} 
+                <p>  <mat-checkbox (click)=categoryFilter(item.category)  value="{{item.category}" class="form-check">{{item.category}} 
                 </mat-checkbox></p>
             </li> 
 
@@ -34,7 +48,7 @@
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox  value="{{item.title}}" class="form-check">{{item.title}} 
+                <p>  <mat-checkbox  (click)=titleFilter(item.title) value="{{item.title}}" class="form-check">{{item.title}} 
                 </mat-checkbox></p>
             </li> 
 
@@ -52,7 +66,7 @@
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox  value="{{item.manufacturer}}" class="form-check">{{item.manufacturer}} 
+                <p>  <mat-checkbox (click)=manufacturerFilter(item.manufacturer) value="{{item.manufacturer}}" class="form-check">{{item.manufacturer}} 
                 </mat-checkbox></p>
             </li> 
           </ul>
