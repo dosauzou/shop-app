@@ -38,3 +38,8 @@ For Admin
 - View customer details
 - View customer orders
 
+//startegy pattern
+//factory method
+//composite method
+//Singleton method
+//proxy for array

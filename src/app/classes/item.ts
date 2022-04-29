@@ -1,9 +1,10 @@
 export class Item {
+    [x: string]: any;
 
-    title: String;
-    manufacturer: String;
-    price: String;
-    category: String;
+    title: string;
+    manufacturer: string;
+    price: number;
+    category: string;
     quantity: number
     
     

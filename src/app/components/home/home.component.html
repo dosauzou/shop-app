@@ -1,4 +1,49 @@
+<div class="container-fluid">
 
+    <nav class="navbar navbar-expand-sm" >
+
+      <div class="dropdown float-left">
+        <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{this.cart.length}}</span>
+        </button>
+        </div>
+        <span class="example-spacer"></span>
+
+        <div class="dropdown">
+       
+          
+            <div > 
+           
+                <ul class="navbar-nav me-auto">
+                  
+
+                  <li class="nav-item">
+                    
+                    <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
+                  </li>
+                  <li class="nav-item">
+                    
+                    <button  mat-button class="nav-link" (click)="sortTitleByDescending()">   Title Descscending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link"(click)="sortByManufacturer()" >Manufacturer Ascending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link"(click)="sortManufacturerByDescending()" >Manufacturer Descending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link" (click)="sortPriceByDescending()">Price Ascending</button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link" (click)="sortByPrice()">Price Descending</button>
+                  </li>
+               
+                </ul>
+            
+              </div>
+            </div>
+    </nav>>
+  </div>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -6,12 +51,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </head>
-    <div class="dropdown float-right">
-    <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
-    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{this.cart.length}}</span>
-    </button>
-    </div>
     
+  
     
   <body>
     <main>

@@ -25,6 +25,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CustomerDetailsComponent } from './components/customer-details/customer
     MatToolbarModule,
     MatButtonModule,
     MatCheckboxModule,
-    ScrollingModule
+    ScrollingModule,
+    MatIconModule
 
     
 
