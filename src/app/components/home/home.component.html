@@ -2,47 +2,15 @@
 
     <nav class="navbar navbar-expand-sm" >
 
-      <div class="dropdown float-left">
-        <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{this.cart.length}}</span>
-        </button>
-        </div>
+      
         <span class="example-spacer"></span>
-
-        <div class="dropdown">
-       
-          
-            <div > 
-           
-                <ul class="navbar-nav me-auto">
-                  
-
-                  <li class="nav-item">
-                    
-                    <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
-                  </li>
-                  <li class="nav-item">
-                    
-                    <button  mat-button class="nav-link" (click)="sortTitleByDescending()">   Title Descscending </button>
-                  </li>
-                  <li class="nav-item">
-                    <button mat-button class="nav-link"(click)="sortByManufacturer()" >Manufacturer Ascending </button>
-                  </li>
-                  <li class="nav-item">
-                    <button mat-button class="nav-link"(click)="sortManufacturerByDescending()" >Manufacturer Descending </button>
-                  </li>
-                  <li class="nav-item">
-                    <button mat-button class="nav-link" (click)="sortPriceByDescending()">Price Ascending</button>
-                  </li>
-                  <li class="nav-item">
-                    <button mat-button class="nav-link" (click)="sortByPrice()">Price Descending</button>
-                  </li>
-               
-                </ul>
-            
-              </div>
+        <div class="dropdown float-left">
+            <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{this.cart.length}}</span>
+            </button>
             </div>
-    </nav>>
+       
+    </nav>
   </div>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -115,6 +83,41 @@
         </section>
     </li>
 </ul>
+<div  class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+    <a  class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-5 fw-semibold">Sort By</span>
+    </a>
+<div > 
+       
+    <ul class="navbar-nav me-auto">
+      
+
+      <li class="nav-item">
+        
+        <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
+      </li>
+      <li class="nav-item">
+        
+        <button  mat-button class="nav-link" (click)="sortTitleByDescending()">   Title Descscending </button>
+      </li>
+      <li class="nav-item">
+        <button mat-button class="nav-link"(click)="sortByManufacturer()" >Manufacturer Ascending </button>
+      </li>
+      <li class="nav-item">
+        <button mat-button class="nav-link"(click)="sortManufacturerByDescending()" >Manufacturer Descending </button>
+      </li>
+      <li class="nav-item">
+        <button mat-button class="nav-link" (click)="sortPriceByDescending()">Price Ascending</button>
+      </li>
+      <li class="nav-item">
+        <button mat-button class="nav-link" (click)="sortByPrice()">Price Descending</button>
+      </li>
+   
+    </ul>
+
+  </div>
+  </div>
 </div>
 
 
@@ -142,6 +145,7 @@
                 </mat-card>
         </div>
       </cdk-virtual-scroll-viewport>
+    
 <!-- 
       <app-scroll-container fxFlex #scrollContainer >
         <div *ngFor="let item of stockList" appScrollTarget [id]="section" [style.minHeight.px]="400" style="border: solid lightgray 1px; margin: 15px; flex-direction: column; display: flex;">
