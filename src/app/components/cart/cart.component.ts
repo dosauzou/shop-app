@@ -6,6 +6,7 @@ import { Cart } from 'src/app/classes/cart';
 import { Item } from 'src/app/classes/item';
 import { Order } from 'src/app/classes/order';
 import { Shipping } from 'src/app/classes/shipping';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cart',
@@ -33,7 +34,7 @@ cccvv : '',
 });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:{cart: Array<Item>},     private formBuilder: FormBuilder,
-  private fb: FormBuilder,
+  private fb: FormBuilder,private _api : ApiService
   ) { 
     this.cart =data.cart
   }
@@ -46,6 +47,7 @@ cccvv : '',
 
    getOrder(){
      this.order= new Order
+     this.order.name = JSON.parse(localStorage.userData)[0].username
      this.order.date = new Date()
      this.order.items = this.cart
      this.order.total = this.getTotal()
@@ -60,10 +62,9 @@ cccvv : '',
      this.order.shippingDetails.country = this.checkoutForm.controls['country'].value;
      this.order.shippingDetails.state = this.checkoutForm.controls['state'].value;
      this.order.shippingDetails.zip = this.checkoutForm.controls['zip'].value;
-console.log(JSON.parse(localStorage.userData))
 
 
-
+ 
 
 
 
@@ -71,8 +72,16 @@ console.log(JSON.parse(localStorage.userData))
 
    onSubmit(){
      this.getOrder()
-     console.log(this.order)
-   }
+     this._api.postTypeRequest('orders/create', this.order).subscribe((res: any) => {
+     
+      if (res.status) { 
+        console.log(res)
+
+
+      }
+    }
+     )}
+   
   ngOnInit(): void {
     console.log(this.data.cart)
   }
