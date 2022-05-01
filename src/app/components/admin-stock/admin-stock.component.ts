@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Item } from 'src/app/classes/item';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,6 +11,13 @@ import { CartComponent } from '../cart/cart.component';
   styleUrls: ['./admin-stock.component.scss']
 })
 export class AdminStockComponent implements OnInit {
+
+  updateForm = this.fb.group({
+    quantity: ['', Validators.required],
+    price: ['', Validators.required],
+
+    
+  })
 
   navbarCollapsed = true; 
 
@@ -28,7 +35,7 @@ export class AdminStockComponent implements OnInit {
 
 
 
-  constructor(private _api: ApiService, public dialog: MatDialog, fb: FormBuilder) {
+  constructor(private _api: ApiService, public dialog: MatDialog, private fb: FormBuilder) {
     this.cart = new Array
     this.checkedBoxes = new Array
     this.filteredList = new Array
@@ -136,7 +143,23 @@ export class AdminStockComponent implements OnInit {
     }
 
   }
+update(x: any){
+  console.log(x)
 
+  const b =x as Item;
+  b.price = this.updateForm.controls['price'].value
+  b.quantity = this.updateForm.controls['quantity'].value
+
+  this._api.postTypeRequest('items/update', b).subscribe((res: any) => {
+    if (res.status) { 
+   
+    } else { 
+      console.log(res)
+      alert(res.msg)
+    }
+  })
+
+}
   sortByTitle(){
     return this.stockList = this.stockList.sort((a, b) => a.title.localeCompare(b.title)).slice()
   }

@@ -29,12 +29,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Reamining work
 For Customer
-- Display result sets, sort results set in ascending/descending order
--Proccess payment and store order details
+
 -Apply discounts
 
 For Admin
-- Update stock details
 - View customer details
 - View customer orders
 

@@ -57,4 +57,38 @@ router.get('/display', async function (req, res, next) {
     }
   });
 
+  router.post('/update', async function (req, res, next) {
+    try {
+    //   let { username, password } = req.body; 
+     
+    //   const hashed_password = md5(password.toString())
+    const sql = 'UPDATE items SET price = ? WHERE title = ?'
+    con.query(
+      sql, [req.body.price, req.body.title],
+    (err, result, fields) =>{
+
+      if(err){
+        console.log(err)
+
+      }else{
+        let token = jwt.sign({ data: result }, 'secret')
+      }
+    })
+    const sql2 = 'UPDATE items SET quantity = ? WHERE title = ?'
+    con.query(
+      sql2, [req.body.quantity, req.body.title],
+    (err, result, fields) =>{
+
+      if(err){
+        console.log(err)
+
+      }else{
+        let token = jwt.sign({ data: result }, 'secret')
+      }
+    })
+    } catch (error) {
+      res.send({ status: 0, error: error });
+    }
+  });
+
   module.exports = router;

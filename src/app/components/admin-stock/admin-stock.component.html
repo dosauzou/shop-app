@@ -82,7 +82,6 @@
                 <ul class="navbar-nav me-auto">
                   
                   <li class="nav-item">
-                    
                     <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
                   </li>
                   <li class="nav-item">
@@ -135,11 +134,18 @@
                     <p>    Price:      {{item.price}}
                     </p>
                  
+                    <p>       Quantity:    {{item.quantity}}
+                    </p>
                     <p>       Category:    {{item.category}}
                     </p>
               </mat-card-content>
                   <mat-card-actions>
-                    <button (click)= addToCart(item) mat-button>Update quantity</button>
+                    <form [formGroup] = "updateForm"  (ngSubmit)="update(item)">
+
+                    <input type="number" class="form-control" formControlName="quantity" placeholder="Update Quantity" required>
+                    <input type="number" class="form-control" formControlName="price" placeholder="Update Price" required>
+                    <button type="submit" class="btn btn-primary">Update Items</button>
+                </form>
                   </mat-card-actions>
                 </mat-card>
         </div>
