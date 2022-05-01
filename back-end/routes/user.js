@@ -18,16 +18,16 @@ const con = mysql.createConnection({
 router.post('/register', async function (req, res, next) {
   try {
 
-    let { username, email, password, firstName, lastName, phoneNo} = req.body; 
+    let { username, email, password, firstName, lastName, phoneNo, admin} = req.body; 
 
     const hashed_password = md5(password.toString())
 
     const checkUsername = `Select username FROM users WHERE username = ?`;
     con.query(checkUsername, [username], (err, result, fields) => {
       if(!result.length){
-        const sql = `Insert Into users (username, email, password, firstname, lastname, phoneNo) VALUES ( ?, ?, ?, ?, ?, ?)`
+        const sql = `Insert Into users (username, email, password, firstname, lastname, phoneNo, admin) VALUES ( ?, ?, ?, ?, ?, ?, ?)`
         con.query(
-          sql, [username, email, hashed_password, firstName, lastName, phoneNo],
+          sql, [username, email, hashed_password, firstName, lastName, phoneNo, admin],
         (err, result, fields) =>{
           if(err){
             console.log(err)

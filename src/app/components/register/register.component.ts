@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
     username:['', Validators.required],
     phoneNo:['', Validators.required],
     password:['', Validators.required],
-    confPassword:['', Validators.required]
+    confPassword:['', Validators.required],
+    admin:false
   });
   submitted: boolean;
 
@@ -44,7 +45,6 @@ export class RegisterComponent implements OnInit {
   }
 
   save(){
-   
     this._api.postTypeRequest('user/register', this.registerForm.value).subscribe((res: any) => {
       if (res.status) { 
         console.log(res)
@@ -56,6 +56,12 @@ export class RegisterComponent implements OnInit {
         alert(res.msg)
       }
     });
+  
+
+  }
+
+  saveAdmin(){
+
   }
 
   get FirstName(){
@@ -78,7 +84,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.saveUser();
+    this.save();
     console.log(this.registerForm.value);
   }
 

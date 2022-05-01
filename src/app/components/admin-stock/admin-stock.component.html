@@ -1,17 +1,4 @@
-<div class="container-fluid">
 
-    <nav class="navbar navbar-expand-sm" >
-
-      
-        <span class="example-spacer"></span>
-        <div class="dropdown float-left">
-            <button (click) =  showCart() type="button" class="btn btn-info" data-toggle="dropdown">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger"></span>
-            </button>
-            </div>
-       
-    </nav>
-  </div>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,7 +12,7 @@
   <body>
     <main>
 <div  class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <a class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-5 fw-semibold">Refine Items</span>
     </a>
@@ -130,7 +117,6 @@
                     <mat-card-title>{{item.title}}</mat-card-title>
                     <mat-card-subtitle>{{item.manufaturer}}</mat-card-subtitle>
                   </mat-card-header>
-                  <img mat-card-image src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo of a Shiba Inu">
             
                   <mat-card-content>
                     <p>    Price:      {{item.price}}
@@ -140,40 +126,8 @@
                     </p>
               </mat-card-content>
                   <mat-card-actions>
-                    <button (click)= addToCart(item) mat-button>Add to cart</button>
+                    <button (click)= addToCart(item) mat-button>Update quantity</button>
                   </mat-card-actions>
                 </mat-card>
         </div>
       </cdk-virtual-scroll-viewport>
-    
-<!-- 
-      <app-scroll-container fxFlex #scrollContainer >
-        <div *ngFor="let item of stockList" appScrollTarget [id]="section" [style.minHeight.px]="400" style="border: solid lightgray 1px; margin: 15px; flex-direction: column; display: flex;">
-          
-  <mat-card class="example-card" >
-    <mat-card-header> -->
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
-        <!-- <mat-card-title>{{item.title}}</mat-card-title>
-        <mat-card-subtitle>{{item.manufaturer}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo of a Shiba Inu">
-
-      <mat-card-content>
-        <p>    Price:      {{item.price}}
-        </p>
-     
-        <p>       Category:    {{item.category}}
-        </p>
-  </mat-card-content>
-      <mat-card-actions>
-        <button (click)= addToCart(item) mat-button>Add to cart</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</app-scroll-container> -->
-
-
-  </div>
-
-    </main>
-  </body>

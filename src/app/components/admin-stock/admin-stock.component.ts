@@ -1,18 +1,17 @@
-import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Item } from 'src/app/classes/item';
 import { ApiService } from 'src/app/services/api.service';
 import { CartComponent } from '../cart/cart.component';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-admin-stock',
+  templateUrl: './admin-stock.component.html',
+  styleUrls: ['./admin-stock.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class AdminStockComponent implements OnInit {
+
   navbarCollapsed = true; 
 
   stockList: Array<Item>;
@@ -38,9 +37,8 @@ export class HomeComponent implements OnInit {
   showCart() {
     const dialogRef = this.dialog.open(
       CartComponent, {
-      panelClass: 'my-outlined-dialog',
-      width: '500px',
-      height: '600px',
+      width: '1000px',
+      height: '1000px',
       data: { cart: this.cart }
     })
   }

@@ -1,0 +1,33 @@
+.scrollarea {
+    overflow-y: auto;
+  }
+  
+  .fw-semibold { font-weight: 600; }
+  .lh-tight { line-height: 1.25; }
+  .inboxContainer {
+      width: 40vw;
+      height: 60vh;
+      border: 1px solid black;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      overflow: auto;
+  }
+  .example-viewport {
+      height: 500px;
+      width: 500px;
+      border: 1px solid rgb(252, 250, 250);
+    }
+    
+    .example-item {
+      height: 800px;
+    }
+    .example-icon {
+      padding: 0 14px;
+    }
+    .example-spacer {
+      flex: 1 1 auto;
+    }

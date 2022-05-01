@@ -26,6 +26,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 import {MatIconModule} from '@angular/material/icon';
+import { AdminStockComponent } from './components/admin-stock/admin-stock.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MatIconModule} from '@angular/material/icon';
     CartComponent,
     AdminHeaderComponent,
     UserHeaderComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    AdminStockComponent
   ],
   imports: [
     BrowserModule,
