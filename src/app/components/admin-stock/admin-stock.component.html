@@ -67,6 +67,47 @@
             </li> 
           </ul>
         </div>
+
+          
+        </section>
+    </li>
+    <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" (click)="collapse1.toggle()" [attr.aria-expanded]="!isCollapsed">
+          Sort By
+        </button>
+        <section class="example-section" >
+
+        <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div > 
+                <ul class="navbar-nav me-auto">
+                  
+                  <li class="nav-item">
+                    
+                    <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
+                  </li>
+                  <li class="nav-item">
+                    
+                    <button  mat-button class="nav-link" (click)="sortTitleByDescending()">   Title Descscending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link"(click)="sortByManufacturer()" >Manufacturer Ascending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link"(click)="sortManufacturerByDescending()" >Manufacturer Descending </button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link" (click)="sortPriceByDescending()">Price Ascending</button>
+                  </li>
+                  <li class="nav-item">
+                    <button mat-button class="nav-link" (click)="sortByPrice()">Price Descending</button>
+                  </li>
+               
+                </ul>
+            
+              </div>
+        </div>
+
+          
         </section>
     </li>
 </ul>
@@ -75,35 +116,7 @@
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-5 fw-semibold">Sort By</span>
     </a>
-<div > 
-       
-    <ul class="navbar-nav me-auto">
-      
 
-      <li class="nav-item">
-        
-        <button  mat-button class="nav-link" (click)="sortByTitle()">   Title Ascending </button>
-      </li>
-      <li class="nav-item">
-        
-        <button  mat-button class="nav-link" (click)="sortTitleByDescending()">   Title Descscending </button>
-      </li>
-      <li class="nav-item">
-        <button mat-button class="nav-link"(click)="sortByManufacturer()" >Manufacturer Ascending </button>
-      </li>
-      <li class="nav-item">
-        <button mat-button class="nav-link"(click)="sortManufacturerByDescending()" >Manufacturer Descending </button>
-      </li>
-      <li class="nav-item">
-        <button mat-button class="nav-link" (click)="sortPriceByDescending()">Price Ascending</button>
-      </li>
-      <li class="nav-item">
-        <button mat-button class="nav-link" (click)="sortByPrice()">Price Descending</button>
-      </li>
-   
-    </ul>
-
-  </div>
   </div>
 </div>
 
@@ -131,3 +144,6 @@
                 </mat-card>
         </div>
       </cdk-virtual-scroll-viewport>
+      </div>
+      </main>
+      </body>

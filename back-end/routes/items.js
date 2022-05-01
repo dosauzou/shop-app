@@ -35,4 +35,26 @@ router.get('/display', async function (req, res, next) {
     }
   });
 
+  router.post('/purchase', async function (req, res, next) {
+    try {
+    //   let { username, password } = req.body; 
+     
+    //   const hashed_password = md5(password.toString())
+    const sql = `Insert Into items (title, manufacturer, price, quantity, category) VALUES ( ?, ?, ?, ?, ?)`
+    con.query(
+      sql, [req.body.title, req.body.manufacturer, req.body.price, req.body.quantity, req.body.category],
+    (err, result, fields) =>{
+
+      if(err){
+        console.log(err)
+
+      }else{
+        let token = jwt.sign({ data: result }, 'secret')
+      }
+    })
+    } catch (error) {
+      res.send({ status: 0, error: error });
+    }
+  });
+
   module.exports = router;

@@ -1,4 +1,38 @@
 <mat-tab-group>
     <mat-tab label="View Stock"><app-admin-stock></app-admin-stock></mat-tab>
-    <mat-tab label="Add Stock"></mat-tab>
+    <mat-tab label="Add Stock">
+        <div class="container">
+            <form [formGroup] = "loginForm"  (ngSubmit)="onSubmit()">
+               
+                  <div class="mb-3 mt-3">
+                    <label for="username" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
+                    formControlName ="title">
+                  </div>
+
+                  <div class="mb-3 mt-3">
+                    <label for="username" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
+                    formControlName ="category">
+                  </div>
+                     <div class="mb-3 mt-3">
+                    <label for="username" class="form-label">Quanitity</label>
+                    <input type="number" class="form-control" id="username" placeholder="Enter username" name="username"
+                    formControlName ="quantity">
+                  </div>
+                  <div class="mb-3 mt-3">
+                    <label for="username" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="username" placeholder="Enter username" name="username"
+                    formControlName ="price">
+                  </div>
+                <div class="mb-3 mt-3">
+               <label for="username" class="form-label">Manufacturer</label>
+               <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
+               formControlName ="manufacturer">
+             </div>
+            
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+          </div>
+    </mat-tab>
 </mat-tab-group>
