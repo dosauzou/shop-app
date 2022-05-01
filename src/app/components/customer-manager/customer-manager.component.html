@@ -1,3 +1,32 @@
 <mat-tab-group>
-    <mat-tab label="View Customers"></mat-tab>
+    <mat-tab label="View Customers">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+            <div *cdkVirtualFor="let user of userList" >
+                <mat-card class="example-card" >
+                    <mat-card-header> 
+                        <mat-card-title>{{user.firstname}}</mat-card-title>
+                        <mat-card-subtitle>Username:    {{user.username}}</mat-card-subtitle>
+                      </mat-card-header>
+                
+                      <mat-card-content>
+                      
+                     
+                        <p>       Last name:    {{user.lastname}}
+                        </p>
+                        <p>    Phone number:      {{user.phoneNo}}
+                        </p>
+                     
+                     
+                        <p>       Email:    {{user. email}}
+                        </p>
+
+
+</mat-card-content>
+                      <mat-card-actions>
+                        <button (click)= addToCart(user) mat-button>View orders</button>
+                      </mat-card-actions>
+                    </mat-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+    </mat-tab>
 </mat-tab-group>
