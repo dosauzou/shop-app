@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "server1": "ts-node -P back-end/server-config.json back-end/app.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -20,11 +21,13 @@
     "@angular/material": "^13.3.4",
     "@angular/platform-browser": "~13.3.4",
     "@angular/platform-browser-dynamic": "~13.3.4",
+    "type": "module",
     "@angular/router": "~13.3.4",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^5.1.3",
     "jquery": "^3.6.0",
     "rxjs": "~6.6.0",
+    "ts-node": "^10.7.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

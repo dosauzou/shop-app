@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
     onSubmit() {
+
       this._api.postTypeRequest('user/login', this.loginForm.value).subscribe((res: any) => {
-     
+        console.log(res)
+
         if (res.status) { 
           this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));  
           this._auth.setDataInLocalStorage('token', res.token);  

@@ -6,6 +6,7 @@ import { Item } from 'src/app/classes/item';
 import { ApiService } from 'src/app/services/api.service';
 import { CartComponent } from '../cart/cart.component';
 import { BehaviorSubject } from 'rxjs';
+import { Cart } from 'src/app/classes/cart';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,8 @@ import { BehaviorSubject } from 'rxjs';
 export class HomeComponent implements OnInit {
   navbarCollapsed = true; 
 
-  stockList: Array<Item>;
-  cart: Array<Item>;
+  stockList: Array<any>;
+  cart: Cart;
   price: number;
   manufacturer: string;
   category: any;
@@ -30,9 +31,11 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private _api: ApiService, public dialog: MatDialog, fb: FormBuilder) {
-    this.cart = new Array
     this.checkedBoxes = new Array
     this.filteredList = new Array
+  }
+
+  newCart(){
   }
 
   showCart() {
@@ -45,9 +48,12 @@ export class HomeComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    this.cart =  new Cart()
 
     this._api.getTypeRequest('items/display').subscribe((res: any) => {
       this.stockList = res.data;
+      console.log(res.data)
+      console.log(this.stockList)
       this.arrayProxy = new Proxy(this.stockList, this.setHandler());
 
 
@@ -60,7 +66,7 @@ export class HomeComponent implements OnInit {
 
 
   cartClear(){
-    this.cart = new Array()
+    this.cart = new Cart()
     console.log(this.cart)
   }
 
@@ -108,10 +114,10 @@ export class HomeComponent implements OnInit {
     if (!this.checkedBoxes.includes(manufacturer)) {
       this.checkedBoxes.push(manufacturer)
 
-      this.stockList  =this.arrayProxy.filter(this.filterByManufacturer(manufacturer)).slice()
+      this.stockList  = this.arrayProxy.filter(this.filterByManufacturer(manufacturer)).slice()
       // this.filteredList.push(x[0])
 
-      const ids = this.filteredList.map(o => o.title)
+      const ids = this.filteredList.map(o => o.getTitle())
       // this.stockList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
 
 
@@ -147,6 +153,7 @@ export class HomeComponent implements OnInit {
   }
 
   sortByPrice(){
+
     return this.stockList = this.stockList.sort((a, b) => (a.price < b.price) ? 1:-1).slice()
   }
 
@@ -177,8 +184,8 @@ export class HomeComponent implements OnInit {
       this.checkedBoxes.push(category)
        this.stockList  = this.arrayProxy.filter(this.filterByCategory(category)).slice()
       // this.filteredList.push(x[0])
-      const ids = this.filteredList.map(o => o.title)
-      this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      const ids = this.filteredList.map(o => o.getTitle())
+      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
 
 
       } else{
@@ -205,9 +212,9 @@ export class HomeComponent implements OnInit {
       this.checkedBoxes.push(title)
 
       this.stockList = this.arrayProxy.filter(this.filterByTitle(title))
-      const ids = this.filteredList.map(o => o.title)
+      const ids = this.filteredList.map(o => o.getTitle())
 
-      this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
 
       //filters the array proxy instead of original array now how do i display that proxy or that og array
     } else {this.delete(title)
@@ -226,9 +233,12 @@ export class HomeComponent implements OnInit {
 
   //sortmethods
   addToCart(item: any) {
-    this.cart.push(item)
-    console.log(this.filteredList)
-    console.log(this.checkedBoxes)
+   let x = new Item(item.title, item.manufacturer, item.price, item.category, item.quantity)
+   console.log(x.getTitle())
+    this.cart.add(x)
+    console.log(this.cart)
+
+
   }
   //add lidle to array once check if clicked again then rempove lidl from array
 

@@ -34,15 +34,13 @@ export class CartComponent implements OnInit {
     cccvv: '',
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { cart: Array<Item> }, private formBuilder: FormBuilder,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { cart: Cart }, private formBuilder: FormBuilder,
     private fb: FormBuilder, private _api: ApiService, public dialog: MatDialog, 
   ) {
-    this.cart = data.cart
+    this.cart = data.cart 
   }
   getTotal() {
-    const result = this.cart.reduce((accumulator: any, obj: { price: any; }) => {
-      return accumulator + obj.price;
-    }, 0);
+    const result = this.cart.getPrice()
     return result
   }
 
@@ -50,8 +48,8 @@ export class CartComponent implements OnInit {
     this.order = new Order
     this.order.name = JSON.parse(localStorage.userData)[0].username
     this.order.date = new Date()
-    this.order.items = this.cart
-    this.order.total = this.getTotal()
+    this.order.items = this.cart.getItems()
+    this.order.total = this.cart.getPrice()
     this.order.accountDetails = new Card()
     this.order.accountDetails.cccvv = this.checkoutForm.controls['cccvv'].value;
     this.order.accountDetails.ccexpiration = this.checkoutForm.controls['ccexpiration'].value;
