@@ -17,17 +17,21 @@ router.post('/create', async function (req: { body: { items: { items: any; }; na
 
         const checkUsername = `Select username FROM users WHERE username = ?`;
         let q = await Mysql.getInstance().query(checkUsername, [username]) as any
+        console.log(q)
+
         if (q) {
             let sql = `Insert Into orders (items, date, user) VALUES ( ?, ?, ?)`
             let q = await Mysql.getInstance().query(sql, [JSON.stringify(req.body.items), req.body.date, req.body.name]) as any
-            sql = `Insert Into accountDetails (cccvv, ccexpiration, ccname, ccnumber) VALUES (?, ?, ?, ?)`
-            q = await Mysql.getInstance().query(
-                sql, [req.body.accountDetails.cccvv, req.body.accountDetails.ccexpiration, req.body.accountDetails.ccname, req.body.accountDetails.ccnumber]) as any
-            sql = `Insert Into shippingDetails (address, address2, state, country, zip) VALUES ( ?, ?, ?, ?, ?)`
-            q = await Mysql.getInstance().query(
-                sql, [req.body.shippingDetails.address, req.body.shippingDetails.address2, req.body.shippingDetails.state, req.body.shippingDetails.country, req.body.shippingDetails.zip])
 
-            if (q.length) {
+
+            if (q) {
+                console.log(q.insertId)
+                sql = `Insert Into accountDetails (cccvv, ccexpiration, ccname, ccnumber, orderId) VALUES (?, ?, ?, ?, ?)`
+                let b = await Mysql.getInstance().query(
+                    sql, [req.body.accountDetails.cccvv, req.body.accountDetails.ccexpiration, req.body.accountDetails.ccname, req.body.accountDetails.ccnumber, q.insertId]) as any
+                sql = `Insert Into shippingDetails (address, address2, state, country, zip, orderId) VALUES ( ?, ?, ?, ?, ?, ?)`
+                b  = await Mysql.getInstance().query(
+                    sql, [req.body.shippingDetails.address, req.body.shippingDetails.address2, req.body.shippingDetails.state, req.body.shippingDetails.country, req.body.shippingDetails.zip, q.insertId])
                 let token = jwt.sign({ data: q }, 'secret')
                 res.send({ status: 1, data: q, token: token });
             }

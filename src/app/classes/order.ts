@@ -11,4 +11,5 @@ export class Order {
     items: Array<IProduct>
     date: Date
     total: number;
+    orderid: any;
 }

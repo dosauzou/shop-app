@@ -103,5 +103,53 @@ router.post('/order', async function (req: { body: { username: any;}; }, res: { 
   }
 });
 
+router.post('/order/details', async function (req: { body: { username: any; orderid: any}; }, res: { send: (arg0: { status: number; error?: any; data?: any; token?: any; }) => void; }, next: any) {
+  try {
+console.log('hey')
+    const orderid = req.body.orderid 
+
+    let { username} = req.body;
+    const sql = `SELECT * FROM shippingDetails WHERE orderid = ?`
+    let q = await Mysql.getInstance().query(sql, [orderid]) as any
+console.log(req.body)
+    if ((q).length) {
+      let token = jwt.sign({ data: q }, 'secret')
+
+      res.send({ status: 1, data: q, token: token });
+    } else {
+      res.send({ status: 0, data: q });
+
+    }
+
+    console.log(q)
+
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+router.post('/order/details/account', async function (req: { body: { username: any; orderid: any}; }, res: { send: (arg0: { status: number; error?: any; data?: any; token?: any; }) => void; }, next: any) {
+  try {
+console.log('hey')
+    const orderid = req.body.orderid 
+
+    let { username} = req.body;
+    const sql = `SELECT * FROM accountDetails WHERE orderid = ?`
+    let q = await Mysql.getInstance().query(sql, [orderid]) as any
+console.log(req.body)
+    if ((q).length) {
+      let token = jwt.sign({ data: q }, 'secret')
+
+      res.send({ status: 1, data: q, token: token });
+    } else {
+      res.send({ status: 0, data: q });
+
+    }
+
+    console.log(q)
+
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
 
 module.exports = router

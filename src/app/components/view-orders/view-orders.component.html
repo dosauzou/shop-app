@@ -1,24 +1,19 @@
 <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
     <div *cdkVirtualFor="let order of orderList" >
-        <mat-card class="example-card" >
-            <mat-card-header> 
-                <mat-card-title>{{order.date}}</mat-card-title>
-              </mat-card-header>
+                <h1>{{order.date}}</h1>
+            
         
-              <mat-card-content *ngFor = "let item of order.items">
+              <div *ngFor = "let item of order.items">
               
              
-                <p>       Product:    {{item.title}}
+                <p>      Brand:    {{item.brand}},  Product:    {{item.title}}, Price:      {{item.price}}
                 </p>
-                <p>    Price:      {{item.price}}
-                </p>
-             
-             
-                <p>       Brand:    {{item.brand}}
-                </p>
+       
 
+</div>
+<p>Account details: {{order.accountDetails | json}}</p>
 
-</mat-card-content>
-            </mat-card>
+             
+<p>Shipping: {{order.shippingDetails | json}}</p>
     </div>
   </cdk-virtual-scroll-viewport>

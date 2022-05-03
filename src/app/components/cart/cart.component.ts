@@ -73,8 +73,9 @@ export class CartComponent implements OnInit {
     console.log(this.order)
     this.getOrder()
     this._api.postTypeRequest('orders/create', this.order).subscribe((res: any) => {
+      console.log(res)
+
       if (res.status) {
-        console.log(res)
       }
     }
 

@@ -37,7 +37,9 @@ router.get('/display', async function (req: any, res: { send: (arg0: { status: n
 
     let q = await Mysql.getInstance().query(sql,[req.body.title, req.body.manufacturer, req.body.price, req.body.quantity, req.body.category]) as any
     console.log(q)
-    if(q.length){
+
+    if(q){
+
         let token = jwt.sign({ data: q }, 'secret')
         res.send({ status: 1, data: q, token: token });
     }else
