@@ -17,10 +17,10 @@ export class AdminStockComponent implements OnInit {
     quantity: ['', Validators.required],
     price: ['', Validators.required],
 
-    
+
   })
 
-  navbarCollapsed = true; 
+  navbarCollapsed = true;
 
   stockList: Array<any>;
   cart: Cart;
@@ -34,7 +34,12 @@ export class AdminStockComponent implements OnInit {
   arrayProxy: any;
   filters: FormGroup;
   checkedBoxes: Array<String>
-
+  manufacturers: any
+  manufacturerList: any[];
+  stockTitle: any[];
+  titleList: any[];
+  categories: any[];
+  categoryList: any[];
 
 
   constructor(private _api: ApiService, public dialog: MatDialog, private fb: FormBuilder) {
@@ -55,7 +60,14 @@ export class AdminStockComponent implements OnInit {
     this._api.getTypeRequest('items/display').subscribe((res: any) => {
       this.stockList = res.data;
       this.arrayProxy = new Proxy(this.stockList, this.setHandler());
+      this.manufacturers = this.stockList.map(o => o.manufacturer)
+      this.manufacturerList = [...new Set(this.manufacturers)];
 
+      this.stockTitle = this.stockList.map(o => o.title)
+      this.titleList = [...new Set(this.stockTitle)];
+
+      this.categories = this.stockList.map(o => o.category)
+      this.categoryList = [...new Set(this.categories)];
 
     }
 
@@ -65,7 +77,7 @@ export class AdminStockComponent implements OnInit {
   }
 
 
-  cartClear(){
+  cartClear() {
     this.cart = new Cart()
     console.log(this.cart)
   }
@@ -81,7 +93,7 @@ export class AdminStockComponent implements OnInit {
       console.log('Checkbox is NOT checked');
     }
 
-    console.log(checkbox?.checked); // 👉️ false
+    console.log(checkbox?.checked);
 
     if (checkbox != null) {
       checkbox.checked = true;
@@ -89,7 +101,7 @@ export class AdminStockComponent implements OnInit {
 
     console.log(checkbox?.checked);
   }
-  //Proxy method
+
 
 
   setHandler() {
@@ -106,25 +118,30 @@ export class AdminStockComponent implements OnInit {
     this.arrayProxy = new Proxy(this.stockList, this.setHandler());
 
   }
-  // priceFilter(element: any, index: any, array: any){
-  //   return (element.price>=this.price);
-  // }
+
+
+
 
   manufacturerFilter(manufacturer: any) {
     if (!this.checkedBoxes.includes(manufacturer)) {
       this.checkedBoxes.push(manufacturer)
 
-      this.stockList  = this.arrayProxy.filter(this.filterByManufacturer(manufacturer)).slice()
-      // this.filteredList.push(x[0])
-
-      const ids = this.filteredList.map(o => o.getTitle())
-      // this.stockList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      this.stockList = this.arrayProxy.filter(this.filterByManufacturer(manufacturer)).slice()
 
 
-    } else {this.delete(manufacturer)
-        console.log(this.filteredList.length)
-        this.deleteObj('manufacturer', manufacturer)
-        this.stockList = this.arrayProxy.slice()
+
+
+      this.manufacturers = this.stockList.map(o => o.manufacturer)
+      this.manufacturerList = [...new Set(this.manufacturers)];
+
+
+    } else {
+      this.delete(manufacturer)
+      this.deleteObj('manufacturer', manufacturer)
+      this.stockList = this.arrayProxy.slice()
+      this.manufacturers = this.stockList.map(o => o.manufacturer)
+      this.manufacturerList = [...new Set(this.manufacturers)];
+
 
     }
 
@@ -137,78 +154,79 @@ export class AdminStockComponent implements OnInit {
 
     }
   }
-  delete( key: any) {
+  delete(key: any) {
     const index = this.checkedBoxes.indexOf(key, 0);
     if (index > -1) {
       this.checkedBoxes.splice(index, 1);
     }
 
   }
-update(x: any){
-  console.log(x)
+  update(x: any) {
+    console.log(x)
 
-  const b =x as Item;
-  // b. = this.updateForm.controls['price'].value
-  b.quantity = this.updateForm.controls['quantity'].value
+    const b = x as Item;
 
-  this._api.postTypeRequest('items/update', b).subscribe((res: any) => {
-    if (res.status) { 
-   
-    } else { 
-      console.log(res)
-      alert(res.msg)
-    }
-  })
+    b.quantity = this.updateForm.controls['quantity'].value
 
-}
-  sortByTitle(){
+    this._api.postTypeRequest('items/update', b).subscribe((res: any) => {
+      if (res.status) {
+
+      } else {
+        console.log(res)
+        alert(res.msg)
+      }
+    })
+
+  }
+  sortByTitle() {
     return this.stockList = this.stockList.sort((a, b) => a.title.localeCompare(b.title)).slice()
   }
-  sortByManufacturer(){
+  sortByManufacturer() {
     return this.stockList = this.stockList.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer)).slice()
   }
 
-  sortByPrice(){
-    return this.stockList = this.stockList.sort((a, b) => (a.price < b.price) ? 1:-1).slice()
+  sortByPrice() {
+    return this.stockList = this.stockList.sort((a, b) => (a.price < b.price) ? 1 : -1).slice()
   }
 
-  sortPriceByDescending(){
+  sortPriceByDescending() {
     this.stockList = this.sortByPrice().reverse().slice()
   }
-  sortManufacturerByDescending(){
+  sortManufacturerByDescending() {
     this.stockList = this.sortByManufacturer().reverse().slice()
   }
-  sortTitleByDescending(){
+  sortTitleByDescending() {
     this.stockList = this.sortByTitle().reverse().slice()
   }
-  deleteObj(type:any, key: any) {
-    const x = type
-    const indexArray = this.filteredList.filter((object => object[type] === key ))
-    for(let x in this.filteredList){
-      console.log(x)
-    const index = this.filteredList.findIndex((object) => {
-      return object[type]=== key;
-    });    if (index > -1) {
-      this.filteredList.splice(index, 1);
-    }
-  }
+  deleteObj(type: any, key: any) {
+
+
+
+
+
+
+
+
+
+
   }
 
   categoryFilter(category: String) {
     if (!this.checkedBoxes.includes(category)) {
       this.checkedBoxes.push(category)
-       this.stockList  = this.arrayProxy.filter(this.filterByCategory(category)).slice()
-      // this.filteredList.push(x[0])
-      const ids = this.filteredList.map(o => o.getTitle())
-      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      this.stockList = this.arrayProxy.filter(this.filterByCategory(category)).slice()
 
 
-      } else{
-      //remove
-       this.delete(category)
-       this.deleteObj('category', category)
-       this.stockList = this.arrayProxy.slice()
+      this.categories = this.stockList.map(o => o.category)
+      this.categoryList = [...new Set(this.categories)];
 
+    } else {
+
+      this.delete(category)
+      this.deleteObj('category', category)
+      this.stockList = this.arrayProxy.slice()
+      this.categories = this.stockList.map(o => o.category)
+      this.categoryList = [...new Set(this.categories)];
 
     }
 
@@ -227,14 +245,18 @@ update(x: any){
       this.checkedBoxes.push(title)
 
       this.stockList = this.arrayProxy.filter(this.filterByTitle(title))
-      const ids = this.filteredList.map(o => o.getTitle())
 
-      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
 
-      //filters the array proxy instead of original array now how do i display that proxy or that og array
-    } else {this.delete(title)
+
+      this.stockTitle = this.stockList.map(o => o.title)
+      this.titleList = [...new Set(this.stockTitle)];
+
+    } else {
+      this.delete(title)
       this.deleteObj('title', title)
       this.stockList = this.arrayProxy.slice()
+      this.stockTitle = this.stockList.map(o => o.title)
+      this.titleList = [...new Set(this.stockTitle)];
     }
   }
   filterByTitle(title: any) {
@@ -242,16 +264,16 @@ update(x: any){
       return (element.title === title)
     }
   }
-  // filterByPrice(){
-  //   this.filteredList = this.stockList.filter(this.priceFilter)
-  // }
 
-  //sortmethods
-  // addToCart(item: any) {
-  //   this.cart.push(item)
-  //   console.log(this.filteredList)
-  //   console.log(this.checkedBoxes)
-  // }
-  //add lidle to array once check if clicked again then rempove lidl from array
+
+
+
+
+
+
+
+
+
+
 
 }

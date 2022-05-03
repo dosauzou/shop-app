@@ -27,7 +27,12 @@ export class HomeComponent implements OnInit {
   arrayProxy: any;
   filters: FormGroup;
   checkedBoxes: Array<String>
-
+  manufacturers: any
+  manufacturerList: any[];
+  stockTitle: any[];
+  titleList: any[];
+  categories: any[];
+  categoryList: any[];
 
 
   constructor(private _api: ApiService, public dialog: MatDialog, fb: FormBuilder) {
@@ -55,12 +60,21 @@ export class HomeComponent implements OnInit {
       console.log(res.data)
       console.log(this.stockList)
       this.arrayProxy = new Proxy(this.stockList, this.setHandler());
+      this.manufacturers = this.stockList.map(o=> o.manufacturer)
+      this.manufacturerList = [...new Set(this.manufacturers)];
 
+      this.stockTitle = this.stockList.map(o=> o.title)
+      this.titleList  = [...new Set(this.stockTitle)];
+
+      this.categories = this.stockList.map(o=> o.category)
+      this.categoryList  = [...new Set(this.categories)];
+      console.log(this.manufacturerList)
+  
 
     }
 
     )
-
+  
 
   }
 
@@ -81,7 +95,7 @@ export class HomeComponent implements OnInit {
       console.log('Checkbox is NOT checked');
     }
 
-    console.log(checkbox?.checked); // 👉️ false
+    console.log(checkbox?.checked); 
 
     if (checkbox != null) {
       checkbox.checked = true;
@@ -89,7 +103,7 @@ export class HomeComponent implements OnInit {
 
     console.log(checkbox?.checked);
   }
-  //Proxy method
+  
 
 
   setHandler() {
@@ -106,25 +120,29 @@ export class HomeComponent implements OnInit {
     this.arrayProxy = new Proxy(this.stockList, this.setHandler());
 
   }
-  // priceFilter(element: any, index: any, array: any){
-  //   return (element.price>=this.price);
-  // }
+  
+  
+  
 
   manufacturerFilter(manufacturer: any) {
     if (!this.checkedBoxes.includes(manufacturer)) {
       this.checkedBoxes.push(manufacturer)
 
       this.stockList  = this.arrayProxy.filter(this.filterByManufacturer(manufacturer)).slice()
-      // this.filteredList.push(x[0])
+      
+      this.manufacturers = this.stockList.map(o=> o.manufacturer)
+      this.manufacturerList = [...new Set(this.manufacturers)];
 
       const ids = this.filteredList.map(o => o.getTitle())
-      // this.stockList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      
 
 
     } else {this.delete(manufacturer)
         console.log(this.filteredList.length)
         this.deleteObj('manufacturer', manufacturer)
         this.stockList = this.arrayProxy.slice()
+        this.manufacturers = this.stockList.map(o=> o.manufacturer)
+        this.manufacturerList = [...new Set(this.manufacturers)];
 
     }
 
@@ -183,17 +201,19 @@ export class HomeComponent implements OnInit {
     if (!this.checkedBoxes.includes(category)) {
       this.checkedBoxes.push(category)
        this.stockList  = this.arrayProxy.filter(this.filterByCategory(category)).slice()
-      // this.filteredList.push(x[0])
+      
       const ids = this.filteredList.map(o => o.getTitle())
-      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
-
+      
+      this.categories = this.stockList.map(o=> o.category)
+      this.categoryList  = [...new Set(this.categories)];
 
       } else{
-      //remove
+      
        this.delete(category)
        this.deleteObj('category', category)
        this.stockList = this.arrayProxy.slice()
-
+       this.categories = this.stockList.map(o=> o.category)
+       this.categoryList  = [...new Set(this.categories)];
 
     }
 
@@ -213,13 +233,18 @@ export class HomeComponent implements OnInit {
 
       this.stockList = this.arrayProxy.filter(this.filterByTitle(title))
       const ids = this.filteredList.map(o => o.getTitle())
+      this.stockTitle = this.stockList.map(o=> o.title)
+      this.titleList  = [...new Set(this.stockTitle)];
 
-      // this.filteredList = this.filteredList.filter(({title}, index) => !ids.includes(title, index + 1))
+      
 
-      //filters the array proxy instead of original array now how do i display that proxy or that og array
+      
     } else {this.delete(title)
       this.deleteObj('title', title)
       this.stockList = this.arrayProxy.slice()
+      this.stockTitle = this.stockList.map(o=> o.title)
+      this.titleList  = [...new Set(this.stockTitle)];
+
     }
   }
   filterByTitle(title: any) {
@@ -227,11 +252,11 @@ export class HomeComponent implements OnInit {
       return (element.title === title)
     }
   }
-  // filterByPrice(){
-  //   this.filteredList = this.stockList.filter(this.priceFilter)
-  // }
+  
+  
+  
 
-  //sortmethods
+  
   addToCart(item: any) {
    let x = new Item(item.title, item.manufacturer, item.price, item.category, item.quantity)
    console.log(x.getTitle())
@@ -240,6 +265,6 @@ export class HomeComponent implements OnInit {
 
 
   }
-  //add lidle to array once check if clicked again then rempove lidl from array
+  
 
 }

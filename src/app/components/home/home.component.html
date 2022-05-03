@@ -38,8 +38,8 @@
 
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox (click)=categoryFilter(item.category)  value="{{item.category}" class="form-check">{{item.category}} 
+            <li class="form-check" *ngFor=" let item of categoryList"> 
+                <p>  <mat-checkbox (click)=categoryFilter(item)  value="{{item}" class="form-check">{{item}} 
                 </mat-checkbox></p>
             </li> 
 
@@ -56,8 +56,8 @@
 
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox  (click)=titleFilter(item.title) value="{{item.title}}" class="form-check">{{item.title}} 
+            <li class="form-check" *ngFor=" let item of titleList"> 
+                <p>  <mat-checkbox  (click)=titleFilter(item) value="{{item}}" class="form-check">{{item}} 
                 </mat-checkbox></p>
             </li> 
 
@@ -74,8 +74,8 @@
 
         <div class="collapse show" id="home-collapse" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li class="form-check" *ngFor=" let item of stockList"> 
-                <p>  <mat-checkbox (click)=manufacturerFilter(item.manufacturer) value="{{item.manufacturer}}" class="form-check">{{item.manufacturer}} 
+            <li class="form-check" *ngFor=" let item of manufacturerList"> 
+                <p>  <mat-checkbox (click)=manufacturerFilter(item) value="{{item}}" class="form-check">{{item}} 
                 </mat-checkbox></p>
             </li> 
           </ul>
@@ -131,7 +131,7 @@
                     <mat-card-subtitle>{{item.manufacturer}}</mat-card-subtitle>
                   </mat-card-header>
                   <img mat-card-image src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo of a Shiba Inu">
-            
+                    //if i make a hashmap
                   <mat-card-content>
                     <p>    Price:      {{item.price}}
                     </p>

@@ -29,7 +29,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-
+//clean up obvious errors
+//do report tomorrow afteroon
 
 //startegy pattern (Dependency injection)
 //factory method to create users

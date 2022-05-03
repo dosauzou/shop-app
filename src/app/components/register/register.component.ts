@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  // user: Customer = new Customer();
+  
 
   registerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -35,22 +35,22 @@ export class RegisterComponent implements OnInit {
     this.submitted = false;
   }
 
-  // saveUser(){
-  //   this.user = new Customer();
-  //   this.user.firstName= this.FirstName?.value;
-  //   this.user.lastName = this.LastName?.value;
-  //   this.user.username = this.userName?.value;
-  //   this.user.email = this.email?.value;
-  //   this.user.password = this.password?.value;
-  //   this.user.phoneNo= this.phoneNo?.value;
-  //   this.save();
-  // }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
     
 
 
   save(){
-    // const factory = new UserHandler()
+    
 const user = Usercreator.createObject(this.registerForm.value)
 console.log(user)
     this._api.postTypeRequest('user/register', user).subscribe((res: any) => {
