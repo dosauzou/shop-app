@@ -53,24 +53,29 @@ router.get('/display', async function (req: any, res: { send: (arg0: { status: n
   router.post('/update', async function (req: { body: { price: any; title: any; quantity: any; }; }, res: { send: (arg0: { status?: number; error?: unknown; data?: any; token?: any}) => void; }, next: any) {
     try {
     //   let { username, password } = req.body; 
-     
     //   const hashed_password = md5(password.toString())
     const sql = 'UPDATE items SET price = ? WHERE title = ?'
     let q = await Mysql.getInstance().query( sql, [req.body.price, req.body.title]) as any
-    if(q.length){
+    if(q){
+        console.log(req.body)
+
+        const sql2 = 'UPDATE items SET quantity = ? WHERE title = ?'
+        q = await Mysql.getInstance().query(sql2, [req.body.quantity, req.body.title]) as any
         let token = jwt.sign({ data: q }, 'secret')
+
         res.send({ status: 1, data: q, token: token });
+
+        if(q){
+            let token = jwt.sign({ data: q }, 'secret')
+            res.send({ status: 1, data: q, token: token });
+        }else
+        res.send({ status: 0, data: q});
+    
     }else
     res.send({ status: 0, data: q});
     
 
-    const sql2 = 'UPDATE items SET quantity = ? WHERE title = ?'
-    q = await Mysql.getInstance().query(sql2, [req.body.quantity, req.body.title]) as any
-    if(q.length){
-        let token = jwt.sign({ data: q }, 'secret')
-        res.send({ status: 1, data: q, token: token });
-    }else
-    res.send({ status: 0, data: q});
+ 
     } catch (error) {
       res.send({ status: 0, error: error });
     }

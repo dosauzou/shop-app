@@ -164,12 +164,13 @@ export class AdminStockComponent implements OnInit {
   update(x: any) {
     console.log(x)
 
-    const b = x as Item;
+    const b = new Item(x.title, x.manufacturer,this.updateForm.controls['price'].value, x.category, this.updateForm.controls['quantity'].value)
+    console.log(b)
 
-    b.quantity = this.updateForm.controls['quantity'].value
 
     this._api.postTypeRequest('items/update', b).subscribe((res: any) => {
       if (res.status) {
+        this.ngOnInit()
 
       } else {
         console.log(res)
