@@ -12,7 +12,6 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user: Customer = new Customer();
   credentials = {username: '', password: ''};
 
 

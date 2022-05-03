@@ -27,17 +27,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 
-Reamining work
-For Customer
 
--Apply discounts
 
-For Admin
-- View customer details
-- View customer orders
 
-//startegy pattern
-//factory method
-//composite method
-//Singleton method
+
+//startegy pattern (Dependency injection)
+//factory method to create users
+//composite method  for managing cart
+//Singleton method for databse connection
 //proxy for array
+//observer pattern for rxjs observables
+//singleton pattern used again through services

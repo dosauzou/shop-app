@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/classes/customer';
+import { Usercreator } from 'src/app/classes/usercreator';
+
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 @Component({
@@ -11,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  user: Customer = new Customer();
+  // user: Customer = new Customer();
 
   registerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -33,23 +35,32 @@ export class RegisterComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveUser(){
-    this.user = new Customer();
-    this.user.userDetails.firstName= this.FirstName?.value;
-    this.user.userDetails.lastName = this.LastName?.value;
-    this.user.userDetails.username = this.userName?.value;
-    this.user.userDetails.email = this.email?.value;
-    this.user.userDetails.password = this.password?.value;
-    this.user.userDetails.phoneNo= this.phoneNo?.value;
-    this.save();
-  }
+  // saveUser(){
+  //   this.user = new Customer();
+  //   this.user.firstName= this.FirstName?.value;
+  //   this.user.lastName = this.LastName?.value;
+  //   this.user.username = this.userName?.value;
+  //   this.user.email = this.email?.value;
+  //   this.user.password = this.password?.value;
+  //   this.user.phoneNo= this.phoneNo?.value;
+  //   this.save();
+  // }
+
+    
+
 
   save(){
-    this._api.postTypeRequest('user/register', this.registerForm.value).subscribe((res: any) => {
+    // const factory = new UserHandler()
+const user = Usercreator.createObject(this.registerForm.value)
+console.log(user)
+    this._api.postTypeRequest('user/register', user).subscribe((res: any) => {
+      console.log(res.status)
       if (res.status) { 
+        console.log('hey')
         console.log(res)
         this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));  
         this._auth.setDataInLocalStorage('token', res.token);  
+        console.log(localStorage)
         this._router.navigate(['login']);
       } else { 
         console.log(res)

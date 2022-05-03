@@ -70,6 +70,7 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.order)
     this.getOrder()
     this._api.postTypeRequest('orders/create', this.order).subscribe((res: any) => {
       if (res.status) {

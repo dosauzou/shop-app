@@ -17,9 +17,9 @@ router.post('/create', async function (req: { body: { items: { items: any; }; na
 
         const checkUsername = `Select username FROM users WHERE username = ?`;
         let q = await Mysql.getInstance().query(checkUsername, [username]) as any
-        if (q.length) {
-            let sql = `Insert Into orders (items, date) VALUES ( ?, ?)`
-            let q = await Mysql.getInstance().query(sql, [JSON.stringify(req.body.items), req.body.date]) as any
+        if (q) {
+            let sql = `Insert Into orders (items, date, user) VALUES ( ?, ?, ?)`
+            let q = await Mysql.getInstance().query(sql, [JSON.stringify(req.body.items), req.body.date, req.body.name]) as any
             sql = `Insert Into accountDetails (cccvv, ccexpiration, ccname, ccnumber) VALUES (?, ?, ?, ?)`
             q = await Mysql.getInstance().query(
                 sql, [req.body.accountDetails.cccvv, req.body.accountDetails.ccexpiration, req.body.accountDetails.ccname, req.body.accountDetails.ccnumber]) as any
@@ -35,7 +35,9 @@ router.post('/create', async function (req: { body: { items: { items: any; }; na
                 res.send({ status: 0, error: q });
 
             }
-        }
+        }else
+        res.send({ status: 0, error: q });
+
 
     } catch (error) {
         res.send({ status: 0, error: error });

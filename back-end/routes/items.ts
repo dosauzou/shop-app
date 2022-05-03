@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');
 
 router.get('/display', async function (req: any, res: { send: (arg0: { status: number; data?: any; token?: any; error?: unknown; }) => void; }, next: any) {
     try {
-        console.log('hey')
     //   let { username, password } = req.body; 
      
     //   const hashed_password = md5(password.toString())
